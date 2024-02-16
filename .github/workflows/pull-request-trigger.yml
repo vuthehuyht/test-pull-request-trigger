@@ -1,0 +1,21 @@
+name: 'Test trigger wwhen PR merged'
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:    
+      - 'main'
+
+jobs:
+  build_and_push_to_registry:
+    name: Build and push Docker image to Docker Hub
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Print message 
+        run: |
+          echo "Trigger is called"
